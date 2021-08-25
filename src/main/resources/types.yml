@@ -1,0 +1,6 @@
+#Tutaj mozna dodac nowe rodzaje spawnerow
+#Typ moba: Przetlumaczona nazwa
+#Typy -> https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/entity/EntityType.html
+types:
+  COW: "Krowa"
+  ZOMBIE: "Zombie"

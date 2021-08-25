@@ -1,0 +1,12 @@
+name: Spawners
+author: Pijok
+version: 1.0
+api-version: 1.16
+main: pl.pijok.spawners.Spawners
+load: POSTWORLD
+depend:
+  - Multiverse-Core
+commands:
+  spawners:
+    usage: /spawners
+    aliases: [spawner]
