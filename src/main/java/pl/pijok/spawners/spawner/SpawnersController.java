@@ -4,6 +4,7 @@
 
 package pl.pijok.spawners.spawner;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -75,7 +76,7 @@ public class SpawnersController
         final Date date = new Date();
         final Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
-        final int hours = calendar.get(Calendar.HOUR);
+        final int hours = calendar.get(Calendar.HOUR_OF_DAY);
         final int minutes = calendar.get(Calendar.MINUTE);
         String a = hours + ":" + minutes;
         Debug.log("Time for checking spawners!");
@@ -100,7 +101,16 @@ public class SpawnersController
             if (!location.getChunk().isLoaded()) {
                 location.getChunk().load();
             }
-            location.getBlock().setType(Material.AIR);
+            Bukkit.getScheduler().scheduleSyncDelayedTask(Spawners.getInstance(), new Runnable() {
+                @Override
+                public void run() {
+                    if (!location.getChunk().isLoaded()) {
+                        location.getChunk().load();
+                    }
+                    location.getBlock().setType(Material.AIR);
+                }
+            });
+
             toRemove.add(spawner);
         }
         for (final Spawner to : toRemove) {
@@ -160,7 +170,7 @@ public class SpawnersController
         final Date date = new Date();
         final Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
-        final int hours = calendar.get(Calendar.HOUR);
+        final int hours = calendar.get(Calendar.HOUR_OF_DAY);
         final int minutes = calendar.get(Calendar.MINUTE);
         final String a = hours + ":" + minutes;
         this.placedSpawners.add(new Spawner(days, location, a));
